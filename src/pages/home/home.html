@@ -1,17 +1,25 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Family</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left (click) = "add()"> Push</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-searchbar (ionInput) = "getItems($event)"></ion-searchbar>      
+  <ion-list>
+    <ion-item-sliding *ngFor = "let address of addresses" #slidingItem>
+      <ion-item [ngClass] = "{Like: address.status == 'favorite'}" (click) = "goDetails(address)" detail-push>
+       {{address.name}}<br>
+       {{address.phone_number}}
+     </ion-item>
+     <ion-item-options side = "right" (ionSwipe) = "remove(address)">
+       <button ion-button icon-only color = "secondary" (click) = "favorite(address)">
+         <ion-icon name = "star-outline"></ion-icon>
+       </button>
+     </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>
 </ion-content>

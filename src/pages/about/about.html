@@ -1,11 +1,24 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Friends
     </ion-title>
+    <ion-buttons end>
+        <button ion-button (click) = "addItem()">
+          Push</button>
+          <button ion-button (click) = "reset()">
+              Reset</button>
+        </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+    <ion-list>
+        <ion-item-sliding *ngFor = "let friend of friends | async" #slidingItem>
+          <ion-item>
+           {{friend.name}}<br>
+           {{friend.phone_number}}
+          </ion-item>
+      </ion-item-sliding>
+      </ion-list>
 </ion-content>
